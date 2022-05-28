@@ -17,12 +17,14 @@ def get_table(dynamodb=None):
                                                endpoint_url=URL)
         try:
             dynamodb = boto3.resource("dynamodb")
-        except:
-            print("Connection dynamodb does not exist, exiting.")
+        except ClientError as e:
+            print(e.response['Error']['Message'])
             raise
+
      # fetch todo from the database
     table = dynamodb.Table(os.environ['DYNAMODB_TABLE'])
     return table
+    
 
 def get_item(key, dynamodb=None):
     table = get_table(dynamodb)
