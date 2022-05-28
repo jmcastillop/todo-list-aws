@@ -21,10 +21,10 @@ def get_table(dynamodb=None):
             print(e.response['Error']['Message'])
             raise
 
-     # fetch todo from the database
+    # fetch todo from the database
     table = dynamodb.Table(os.environ['DYNAMODB_TABLE'])
     return table
-    
+
 
 def get_item(key, dynamodb=None):
     table = get_table(dynamodb)
