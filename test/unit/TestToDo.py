@@ -200,15 +200,18 @@ class TestDatabaseFunctions(unittest.TestCase):
         self.assertRaises(TypeError, delete_item("", self.dynamodb))
         print ('End: test_delete_todo_error')
         
-    def test_get_table_todo(self):
+    def test_get_table_todo_nonexist_table(self):
         print ('---------------------')
-        print ('Start: test_get_table_todo')
-        from src.todoList import get_table
-        # Table mock
-        dynamodb = boto3.resource("dynamodb")
-         # fetch todo from the database
-        table = dynamodb.Table(os.environ['DYNAMODB_TABLE'])
-        assert len(self.table.scan()['Items']) == 1
+        print ('Start: test_table_exists')
+        #self.assertTrue(self.table)  # check if we got a result
+        #self.assertTrue(self.table_local)  # check if we got a result
+
+        print('Table name:' + self.table.name)
+        tableName = os.environ['DYNAMODB_TABLE_NULL'];
+        # check if the table name is 'ToDo'
+        self.assertEqual(tableName,"")
+        #self.assertIn('todoTable', self.table_local.name)
+        print ('End: test_table_exists')
 
 
 
