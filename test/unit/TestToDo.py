@@ -207,7 +207,8 @@ class TestDatabaseFunctions(unittest.TestCase):
         print ('Start: test_get_table_not_dynamodb')
         from src.todoList import get_table
         
-        get_table(None)
+        self.dynamodb = None
+        get_table()
 
         print('Table name:' + self.table.name)
         tableName = os.environ['DYNAMODB_TABLE'];
