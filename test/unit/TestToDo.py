@@ -201,23 +201,21 @@ class TestDatabaseFunctions(unittest.TestCase):
         self.assertRaises(TypeError, delete_item("", self.dynamodb))
         print ('End: test_delete_todo_error')
     
-    @mock.patch.dict(os.environ, {"ENDPOINT_OVERRIDE": "http://dynamodb:8000"})
-    def test_get_table_not_dynamodb(self):
+    def test_get_todo_failure(self):
         print ('---------------------')
-        print ('Start: test_get_table_not_dynamodb')
-        from src.todoList import get_table
-        
-        self.dynamodb = None
-        get_table()
+        print ('Start: test_get_todo')
+        from src.todoList import get_item
+   
+        responseGet = get_item(
+                25321,
+                self.dynamodb)
+        self.assertRaises(
+            TypeError,
+            get_item(
+                25321,
+                self.dynamodb))
+        print ('End: test_get_todo_failure')
 
-        print('Table name:' + self.table.name)
-        tableName = os.environ['DYNAMODB_TABLE'];
-        # check if the table name is 'ToDo'
-        self.assertIn(tableName, self.table.name)
-        #self.assertIn('todoTable', self.table_local.name)
-        print ('End: test_get_table_not_dynamodb')
-    
-       
 
 if __name__ == '__main__':
     unittest.main()
