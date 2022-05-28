@@ -199,6 +199,16 @@ class TestDatabaseFunctions(unittest.TestCase):
         # Testing file functions
         self.assertRaises(TypeError, delete_item("", self.dynamodb))
         print ('End: test_delete_todo_error')
+        
+    def test_get_table_todo(self):
+        print ('---------------------')
+        print ('Start: test_get_table_todo')
+        from src.todoList import get_table
+        # Table mock
+        dynamodb = boto3.resource("dynamodb")
+         # fetch todo from the database
+        table = dynamodb.Table(os.environ['DYNAMODB_TABLE'])
+        assert len(self.table.scan()['Items']) == 1
 
 
 
