@@ -58,6 +58,19 @@ class TestDatabaseFunctions(unittest.TestCase):
         #self.assertIn('todoTable', self.table_local.name)
         print ('End: test_table_exists')
         
+    def test_table_not_exists(self):
+        print ('---------------------')
+        print ('Start: test_table_exists')
+        #self.assertTrue(self.table)  # check if we got a result
+        #self.assertTrue(self.table_local)  # check if we got a result
+
+        print('Table name:' + self.table.name)
+        tableName = os.environ['DYNAMODB_TABLE_NOT_EXIST'];
+        # check if the table name is 'ToDo'
+        self.assertEqual(tableName, None)
+        #self.assertIn('todoTable', self.table_local.name)
+        print ('End: test_table_exists')
+        
 
     def test_put_todo(self):
         print ('---------------------')
@@ -199,21 +212,8 @@ class TestDatabaseFunctions(unittest.TestCase):
         # Testing file functions
         self.assertRaises(TypeError, delete_item("", self.dynamodb))
         print ('End: test_delete_todo_error')
-        
-    def test_get_table_todo_nonexist_table(self):
-        print ('---------------------')
-        print ('Start: test_table_exists')
-        #self.assertTrue(self.table)  # check if we got a result
-        #self.assertTrue(self.table_local)  # check if we got a result
-
-        print('Table name:' + self.table.name)
-        tableName = os.environ['DYNAMODB_TABLE_NULL'];
-        # check if the table name is 'ToDo'
-        self.assertEqual(tableName,"")
-        #self.assertIn('todoTable', self.table_local.name)
-        print ('End: test_table_exists')
-
-
+    
+       
 
 if __name__ == '__main__':
     unittest.main()
