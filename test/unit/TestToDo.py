@@ -5,6 +5,7 @@ import boto3
 from moto import mock_dynamodb2
 import sys
 import os
+from unittest import mock
 import json
 
 @mock_dynamodb2
@@ -200,6 +201,7 @@ class TestDatabaseFunctions(unittest.TestCase):
         self.assertRaises(TypeError, delete_item("", self.dynamodb))
         print ('End: test_delete_todo_error')
     
+    @mock.patch.dict(os.environ, {"ENDPOINT_OVERRIDE": "http://dynamodb:8000"})
     def test_get_table_not_dynamodb(self):
         print ('---------------------')
         print ('Start: test_get_table_not_dynamodb')
