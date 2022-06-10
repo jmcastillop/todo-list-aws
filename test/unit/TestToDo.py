@@ -213,6 +213,19 @@ class TestDatabaseFunctions(unittest.TestCase):
         # Testing file functions
         self.assertRaises(TypeError, delete_item("", self.dynamodb))
         print ('End: test_delete_todo_error')
+        
+    @mock_dynamodb2
+    def test_get_todo_error(self):
+        print ('---------------------')
+        print ('Start: test_get_todo_error')
+        from src.todoList import get_item
+        from src.todoList import get_table
+        from unittest.mock import Mock  #Se importa la librería Mock
+        # Table mock
+        self.table = Mock()   #Se llama a la función Mock para mockear la tabla
+        self.table.get_item.raiseError.side_effect = Mock(side_effect=Exception('Raise Exception')) #Si no se puede obtener el item se mockea la excepción    
+        self.assertRaises(Exception, get_item('undefined', self.dynamodb))
+        print ('End: test_get_todo_error') 
 
 
 
