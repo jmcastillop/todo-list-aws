@@ -1,11 +1,11 @@
 # from pprint import pprint
-# coding=utf-8
 import warnings
 import unittest
 import boto3
 from moto import mock_dynamodb2
 import sys
 import os
+from unittest import mock
 import json
 
 @mock_dynamodb2
@@ -200,8 +200,16 @@ class TestDatabaseFunctions(unittest.TestCase):
         # Testing file functions
         self.assertRaises(TypeError, delete_item("", self.dynamodb))
         print ('End: test_delete_todo_error')
-
-
+    
+    def test_get_table_error(self):
+        print ('---------------------')
+        print ('Start: test_get_table_error')
+        from src.todoList import get_table()
+        
+        self
+        # Testing file functions
+        self.assertRaises(TypeError, get_table("", self.dynamodb))
+        print ('End: test_get_table_error')    
 
 if __name__ == '__main__':
     unittest.main()
