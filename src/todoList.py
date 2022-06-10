@@ -6,7 +6,6 @@ import json
 import functools
 from botocore.exceptions import ClientError
 
-
 def get_table(dynamodb=None):
     if not dynamodb:
         URL = os.environ['ENDPOINT_OVERRIDE']
@@ -36,13 +35,11 @@ def get_item(key, dynamodb=None):
         if 'Item' in result:
             return result['Item']
 
-
 def get_items(dynamodb=None):
     table = get_table(dynamodb)
     # fetch todo from the database
     result = table.scan()
     return result['Items']
-
 
 def put_item(text, dynamodb=None):
     table = get_table(dynamodb)
@@ -68,7 +65,6 @@ def put_item(text, dynamodb=None):
         print(e.response['Error']['Message'])
     else:
         return response
-
 
 def update_item(key, text, checked, dynamodb=None):
     table = get_table(dynamodb)
@@ -98,7 +94,6 @@ def update_item(key, text, checked, dynamodb=None):
     else:
         return result['Attributes']
 
-
 def delete_item(key, dynamodb=None):
     table = get_table(dynamodb)
     # delete the todo from the database
@@ -113,7 +108,6 @@ def delete_item(key, dynamodb=None):
         print(e.response['Error']['Message'])
     else:
         return
-
 
 def create_todo_table(dynamodb):
     # For unit testing
