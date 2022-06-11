@@ -124,10 +124,10 @@ class TestDatabaseFunctions(unittest.TestCase):
         self.assertTrue(result[0]['text'] == self.text)
         print ('End: test_list_todo')
 
+    @mock_dynamodb2
     def test_translate_todo(self):
         print ('---------------------')
         print ('Start: test_translate_todo')
-        self.table  = os.environ['DYNAMODB_TABLE'] + "_language"
         from src.todoList import translate_item
         # Testing file functions
         translation = translate_item(self.text, "en", self.dynamodb)
