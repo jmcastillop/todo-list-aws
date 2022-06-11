@@ -124,7 +124,6 @@ class TestDatabaseFunctions(unittest.TestCase):
         self.assertTrue(result[0]['text'] == self.text)
         print ('End: test_list_todo')
 
-
     def test_translate_todo(self):
         print ('---------------------')
         print ('Start: test_translate_todo')
@@ -138,7 +137,6 @@ class TestDatabaseFunctions(unittest.TestCase):
         translation = translate_item(self.text, "fr", self.dynamodb)
         print ('Response translate fr:' + str(translation))
         self.assertEqual("Apprenez DevOps et Cloud à l'UNIR", translation)
-        "Apprenez DevOps et Cloud à l'UNIR"
         print ('End: test_traslate_todo')
 
 
