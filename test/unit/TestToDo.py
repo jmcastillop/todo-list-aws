@@ -124,22 +124,15 @@ class TestDatabaseFunctions(unittest.TestCase):
         self.assertTrue(result[0]['text'] == self.text)
         print ('End: test_list_todo')
 
-    @mock_dynamodb2
+
     def test_translate_todo(self):
         print ('---------------------')
         print ('Start: test_translate_todo')
         from src.todoList import translate_item
         # Testing file functions
-        self.dynamodb = boto3.resource('dynamodb', region_name='us-east-1')
-        self.is_local = 'true'
-        self.uuid = "123e4567-e89b-12d3-a456-426614174000"
-        self.text = "Aprender DevOps y Cloud en la UNIR"
-
-        from src.todoList import create_todo_table
-        self.table = create_todo_table(self.dynamodb)
-        
-        
-        translation = translate_item(self.text, "en", self.dynamodb)
+        translate = boto3.client(service_name='translate', region_name='us-east-1')
+        translation = translate.translate_text(Text=self.text, SourceLanguageCode="auto", TargetLanguageCode="en")
+        #translation = translate_item(self.text, "en", self.dynamodb)
         print ('Response translate en:' + str(translation))
         self.assertEqual("Learn DevOps and Cloud at UNIR", translation)
         translation = translate_item(self.text, "fr", self.dynamodb)
