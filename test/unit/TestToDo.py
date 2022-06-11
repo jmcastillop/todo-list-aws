@@ -130,9 +130,7 @@ class TestDatabaseFunctions(unittest.TestCase):
         print ('Start: test_translate_todo')
         from src.todoList import translate_item
         # Testing file functions
-        translate = boto3.client(service_name='translate', region_name='us-east-1')
-        translation = translate.translate_text(Text=self.text, SourceLanguageCode="auto", TargetLanguageCode="en")
-        #translation = translate_item(self.text, "en", self.dynamodb)
+        translation = translate_item(self.text, "en", self.dynamodb)
         print ('Response translate en:' + str(translation))
         self.assertEqual("Learn DevOps and Cloud at UNIR", translation)
         translation = translate_item(self.text, "fr", self.dynamodb)
