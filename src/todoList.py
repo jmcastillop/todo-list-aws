@@ -144,9 +144,9 @@ def create_todo_table(dynamodb):
     table.meta.client.get_waiter('table_exists').wait(TableName=tableName)
     if (table.table_status != 'ACTIVE'):
         raise AssertionError()
-
     return table
-    
+
+
 def translate_item(text, language, dynamodb=None):
     translate = boto3.client(service_name='translate', region_name='us-east-1')
     try:
