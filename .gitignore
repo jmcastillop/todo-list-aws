@@ -1,8 +1,9 @@
 .aws-sam/
 __pycache__/
 .git
+.pytest_cache
 tests
-pyenvunittests
+pyenvunittests/
 .coverage
 coverage.xml
 source/
