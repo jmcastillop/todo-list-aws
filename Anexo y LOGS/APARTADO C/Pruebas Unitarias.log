@@ -1,0 +1,231 @@
+Unit testing:
+[Pipeline] sh
++ bash pipelines/PIPELINE-FULL-STAGING/unit_test.sh
+++ pwd
++ export 'PYTHONPATH=:/var/lib/jenkins/workspace/Practica 1/PIPELINE-FULL-STAGING'
++ PYTHONPATH=':/var/lib/jenkins/workspace/Practica 1/PIPELINE-FULL-STAGING'
++ echo 'PYTHONPATH: :/var/lib/jenkins/workspace/Practica 1/PIPELINE-FULL-STAGING'
+PYTHONPATH: :/var/lib/jenkins/workspace/Practica 1/PIPELINE-FULL-STAGING
++ export DYNAMODB_TABLE=todoUnitTestsTable
++ DYNAMODB_TABLE=todoUnitTestsTable
++ python test/unit/TestToDo.py
+/var/lib/jenkins/workspace/Practica 1/PIPELINE-FULL-STAGING/todo-list-aws/lib/python3.7/site-packages/moto/__init__.py:27: UserWarning: Module mock_dynamodb2 has been deprecated, and will be removed in a later release. Please use mock_dynamodb instead. See https://github.com/spulec/moto/issues/4526 for more information.
+  f"Module {used} has been deprecated, and will be removed in a later release. Please use {recommended} instead. "
+/var/lib/jenkins/workspace/Practica 1/PIPELINE-FULL-STAGING/todo-list-aws/lib/python3.7/site-packages/moto/__init__.py:27: UserWarning: Module mock_dynamodb2 has been deprecated, and will be removed in a later release. Please use mock_dynamodb instead. See https://github.com/spulec/moto/issues/4526 for more information.
+  f"Module {used} has been deprecated, and will be removed in a later release. Please use {recommended} instead. "
+........FE..
+======================================================================
+ERROR: test_translate_todo (__main__.TestDatabaseFunctions)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/var/lib/jenkins/workspace/Practica 1/PIPELINE-FULL-STAGING/todo-list-aws/lib/python3.7/site-packages/moto/core/models.py", line 120, in wrapper
+    result = func(*args, **kwargs)
+  File "test/unit/TestToDo.py", line 43, in tearDown
+    self.table.delete()
+AttributeError: 'str' object has no attribute 'delete'
+
+======================================================================
+FAIL: test_translate_todo (__main__.TestDatabaseFunctions)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/var/lib/jenkins/workspace/Practica 1/PIPELINE-FULL-STAGING/todo-list-aws/lib/python3.7/site-packages/moto/core/models.py", line 120, in wrapper
+    result = func(*args, **kwargs)
+  File "test/unit/TestToDo.py", line 137, in test_translate_todo
+    self.assertEqual("Learn DevOps and Cloud at UNIR", translation)
+AssertionError: 'Learn DevOps and Cloud at UNIR' != None
+
+----------------------------------------------------------------------
+Ran 11 tests in 1.030s
+
+FAILED (failures=1, errors=1)
+---------------------
+Start: setUp
+Creating Table with name:todoUnitTestsTable
+End: setUp
+---------------------
+Start: test_delete_todo
+Table name:todoUnitTestsTable
+Response PutItem{'statusCode': 200, 'body': '{"id": "83b666d8-e990-11ec-92b6-129cc5bc5a63", "text": "Aprender DevOps y Cloud en la UNIR", "checked": false, "createdAt": "1654956743.5784066", "updatedAt": "1654956743.5784066"}'}
+Id item:83b666d8-e990-11ec-92b6-129cc5bc5a63
+Item deleted succesfully
+End: test_delete_todo
+---------------------
+Start: tearDown
+Table deleted succesfully
+End: tearDown
+---------------------
+Start: setUp
+Creating Table with name:todoUnitTestsTable
+End: setUp
+---------------------
+Start: test_delete_todo_error
+A condition specified in the operation could not be evaluated.
+End: test_delete_todo_error
+---------------------
+Start: tearDown
+Table deleted succesfully
+End: tearDown
+---------------------
+Start: setUp
+Creating Table with name:todoUnitTestsTable
+End: setUp
+---------------------
+Start: test_get_todo
+Table name:todoUnitTestsTable
+Response put_item:{'statusCode': 200, 'body': '{"id": "83b666d9-e990-11ec-92b6-129cc5bc5a63", "text": "Aprender DevOps y Cloud en la UNIR", "checked": false, "createdAt": "1654956743.7505646", "updatedAt": "1654956743.7505646"}'}
+Id item:83b666d9-e990-11ec-92b6-129cc5bc5a63
+Result getItem:{'Item': {'id': '83b666d9-e990-11ec-92b6-129cc5bc5a63', 'text': 'Aprender DevOps y Cloud en la UNIR', 'checked': False, 'createdAt': '1654956743.7505646', 'updatedAt': '1654956743.7505646'}, 'ResponseMetadata': {'RequestId': 'PBTLUE7PAW6E0SB7AX4DRZPW85H565PL9IHKV4I14K9T4BKU7XQS', 'HTTPStatusCode': 200, 'HTTPHeaders': {'server': 'amazon.com', 'x-amzn-requestid': 'PBTLUE7PAW6E0SB7AX4DRZPW85H565PL9IHKV4I14K9T4BKU7XQS', 'x-amz-crc32': '2128655091'}, 'RetryAttempts': 0}}
+Response Get:{'id': '83b666d9-e990-11ec-92b6-129cc5bc5a63', 'text': 'Aprender DevOps y Cloud en la UNIR', 'checked': False, 'createdAt': '1654956743.7505646', 'updatedAt': '1654956743.7505646'}
+End: test_get_todo
+---------------------
+Start: tearDown
+Table deleted succesfully
+End: tearDown
+---------------------
+Start: setUp
+Creating Table with name:todoUnitTestsTable
+End: setUp
+---------------------
+Start: test_get_todo_error
+Requested resource not found
+End: test_get_todo_error
+---------------------
+Start: tearDown
+Table deleted succesfully
+End: tearDown
+---------------------
+Start: setUp
+Creating Table with name:todoUnitTestsTable
+End: setUp
+---------------------
+Start: test_list_todo
+Table name:todoUnitTestsTable
+Response GetItems[{'id': '83b666da-e990-11ec-92b6-129cc5bc5a63', 'text': 'Aprender DevOps y Cloud en la UNIR', 'checked': False, 'createdAt': '1654956743.96837', 'updatedAt': '1654956743.96837'}]
+End: test_list_todo
+---------------------
+Start: tearDown
+Table deleted succesfully
+End: tearDown
+---------------------
+Start: setUp
+Creating Table with name:todoUnitTestsTable
+End: setUp
+---------------------
+Start: test_put_todo
+Table name:todoUnitTestsTable
+Response put_item:{'statusCode': 200, 'body': '{"id": "83b666db-e990-11ec-92b6-129cc5bc5a63", "text": "Aprender DevOps y Cloud en la UNIR", "checked": false, "createdAt": "1654956744.0372221", "updatedAt": "1654956744.0372221"}'}
+End: test_put_todo
+---------------------
+Start: tearDown
+Table deleted succesfully
+End: tearDown
+---------------------
+Start: setUp
+Creating Table with name:todoUnitTestsTable
+End: setUp
+---------------------
+Start: test_put_todo_error
+Table name:todoUnitTestsTable
+Requested resource not found
+End: test_put_todo_error
+---------------------
+Start: tearDown
+Table deleted succesfully
+End: tearDown
+---------------------
+Start: setUp
+Creating Table with name:todoUnitTestsTable
+End: setUp
+---------------------
+Start: test_table_exists
+Table name:todoUnitTestsTable
+End: test_table_exists
+---------------------
+Start: tearDown
+Table deleted succesfully
+End: tearDown
+---------------------
+Start: setUp
+Creating Table with name:todoUnitTestsTable
+End: setUp
+---------------------
+Start: test_translate_todo
+The security token included in the request is invalid.
+Response translate en:None
+---------------------
+Start: tearDown
+---------------------
+Start: setUp
+Creating Table with name:todoUnitTestsTable
+End: setUp
+---------------------
+Start: test_update_todo
+Table name:todoUnitTestsTable
+Response PutItem{'statusCode': 200, 'body': '{"id": "83b666dd-e990-11ec-92b6-129cc5bc5a63", "text": "Aprender DevOps y Cloud en la UNIR", "checked": false, "createdAt": "1654956744.4334402", "updatedAt": "1654956744.4334402"}'}
+Id item:83b666dd-e990-11ec-92b6-129cc5bc5a63
+Result Update Item:{'id': '83b666dd-e990-11ec-92b6-129cc5bc5a63', 'text': 'Aprender más cosas que DevOps y Cloud en la UNIR', 'checked': 'false', 'createdAt': '1654956744.4334402', 'updatedAt': Decimal('1654956744437')}
+End: test_update_todo
+---------------------
+Start: tearDown
+Table deleted succesfully
+End: tearDown
+---------------------
+Start: setUp
+Creating Table with name:todoUnitTestsTable
+End: setUp
+---------------------
+Start: atest_update_todo_error
+Table name:todoUnitTestsTable
+Requested resource not found
+Table name:todoUnitTestsTable
+Requested resource not found
+Response PutItemNone
+Requested resource not found
+Requested resource not found
+Requested resource not found
+End: atest_update_todo_error
+---------------------
+Start: tearDown
+Table deleted succesfully
+End: tearDown
++ pip show coverage
+Name: coverage
+Version: 4.5.4
+Summary: Code coverage measurement for Python
+Home-page: https://github.com/nedbat/coveragepy
+Author: Ned Batchelder and 100 others
+Author-email: ned@nedbatchelder.com
+License: Apache 2.0
+Location: /var/lib/jenkins/workspace/Practica 1/PIPELINE-FULL-STAGING/todo-list-aws/lib/python3.7/site-packages
+Requires: 
+Required-by: 
++ coverage run --include=src/todoList.py test/unit/TestToDo.py
+/var/lib/jenkins/workspace/Practica 1/PIPELINE-FULL-STAGING/todo-list-aws/lib/python3.7/site-packages/moto/__init__.py:27: UserWarning: Module mock_dynamodb2 has been deprecated, and will be removed in a later release. Please use mock_dynamodb instead. See https://github.com/spulec/moto/issues/4526 for more information.
+  f"Module {used} has been deprecated, and will be removed in a later release. Please use {recommended} instead. "
+/var/lib/jenkins/workspace/Practica 1/PIPELINE-FULL-STAGING/todo-list-aws/lib/python3.7/site-packages/moto/__init__.py:27: UserWarning: Module mock_dynamodb2 has been deprecated, and will be removed in a later release. Please use mock_dynamodb instead. See https://github.com/spulec/moto/issues/4526 for more information.
+  f"Module {used} has been deprecated, and will be removed in a later release. Please use {recommended} instead. "
+........FE..
+======================================================================
+ERROR: test_translate_todo (__main__.TestDatabaseFunctions)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/var/lib/jenkins/workspace/Practica 1/PIPELINE-FULL-STAGING/todo-list-aws/lib/python3.7/site-packages/moto/core/models.py", line 120, in wrapper
+    result = func(*args, **kwargs)
+  File "test/unit/TestToDo.py", line 43, in tearDown
+    self.table.delete()
+AttributeError: 'str' object has no attribute 'delete'
+
+======================================================================
+FAIL: test_translate_todo (__main__.TestDatabaseFunctions)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/var/lib/jenkins/workspace/Practica 1/PIPELINE-FULL-STAGING/todo-list-aws/lib/python3.7/site-packages/moto/core/models.py", line 120, in wrapper
+    result = func(*args, **kwargs)
+  File "test/unit/TestToDo.py", line 137, in test_translate_todo
+    self.assertEqual("Learn DevOps and Cloud at UNIR", translation)
+AssertionError: 'Learn DevOps and Cloud at UNIR' != None
+
+----------------------------------------------------------------------
+Ran 11 tests in 1.299s
+
+FAILED (failures=1, errors=1)

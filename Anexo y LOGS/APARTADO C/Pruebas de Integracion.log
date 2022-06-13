@@ -1,0 +1,48 @@
++ bash pipelines/common-steps/integration.sh https://aio2gvywik.execute-api.us-east-1.amazonaws.com/Prod
++ export BASE_URL=https://aio2gvywik.execute-api.us-east-1.amazonaws.com/Prod
++ BASE_URL=https://aio2gvywik.execute-api.us-east-1.amazonaws.com/Prod
++ pytest -s test/integration/todoApiTest.py
+============================= test session starts ==============================
+platform linux -- Python 3.7.5, pytest-7.1.2, pluggy-1.0.0
+rootdir: /var/lib/jenkins/workspace/Practica 1/PIPELINE-FULL-STAGING, configfile: pytest.ini
+collected 6 items
+
+test/integration/todoApiTest.py ---------------------------------------
+Starting - integration test Add TODO
+Response Add Todo: {"id": "2c06e1e0-e98d-11ec-b847-6e96dba4cd2e", "text": "Integration text example", "checked": false, "createdAt": "1654955307.855241", "updatedAt": "1654955307.855241"}
+ID todo:2c06e1e0-e98d-11ec-b847-6e96dba4cd2e
+End - integration test Add TODO
+.---------------------------------------
+Starting - integration test Delete TODO
+Response Add todo: {"id": "2dbb87c0-e98d-11ec-b847-6e96dba4cd2e", "text": "Integration text example - Initial", "checked": false, "createdAt": "1654955310.856633", "updatedAt": "1654955310.856633"}
+ID todo:2dbb87c0-e98d-11ec-b847-6e96dba4cd2e
+Response Delete Todo:<Response [200]>
+Response Get Todo https://aio2gvywik.execute-api.us-east-1.amazonaws.com/Prod/todos/2dbb87c0-e98d-11ec-b847-6e96dba4cd2e: <Response [404]>
+End - integration test Delete TODO
+.---------------------------------------
+Starting - integration test Get TODO
+Response Add Todo: {'statusCode': 200, 'body': '{"id": "2f6ca5a4-e98d-11ec-b847-6e96dba4cd2e", "text": "Integration text example - GET", "checked": false, "createdAt": "1654955313.6951113", "updatedAt": "1654955313.6951113"}'}
+ID todo:2f6ca5a4-e98d-11ec-b847-6e96dba4cd2e
+Response Get Todo: {'checked': False, 'createdAt': '1654955313.6951113', 'text': 'Integration text example - GET', 'id': '2f6ca5a4-e98d-11ec-b847-6e96dba4cd2e', 'updatedAt': '1654955313.6951113'}
+End - integration test Get TODO
+.---------------------------------------
+Starting - integration test List TODO
+Response Add Todo: {'statusCode': 200, 'body': '{"id": "2fe9ea96-e98d-11ec-b847-6e96dba4cd2e", "text": "Integration text example", "checked": false, "createdAt": "1654955314.5160801", "updatedAt": "1654955314.5160801"}'}
+ID todo:2fe9ea96-e98d-11ec-b847-6e96dba4cd2e
+Response List Todo:[{'checked': False, 'createdAt': '1654950797.0451617', 'text': 'Integration text example', 'id': 'ab4a8ef8-e982-11ec-aefe-8a80d9b738c4', 'updatedAt': '1654950797.0451617'}, {'checked': False, 'createdAt': '1653737379.5630417', 'text': 'Integration text example', 'id': '761c83c6-de79-11ec-8dfe-227d538925a1', 'updatedAt': '1653737379.5630417'}, {'checked': False, 'createdAt': '1653651390.6473691', 'text': 'Integration text example', 'id': '40b9417e-ddb1-11ec-9c1d-de549dc0e316', 'updatedAt': '1653651390.6473691'}, {'checked': False, 'createdAt': '1654955314.5160801', 'text': 'Integration text example', 'id': '2fe9ea96-e98d-11ec-b847-6e96dba4cd2e', 'updatedAt': '1654955314.5160801'}, {'checked': False, 'createdAt': '1653764026.184904', 'text': 'Integration text example', 'id': '80bc5642-deb7-11ec-b323-3adf6fc56125', 'updatedAt': '1653764026.184904'}, {'checked': False, 'createdAt': '1653765341.7096508', 'text': 'Integration text example', 'id': '90df13fe-deba-11ec-8f59-7e784b384f22', 'updatedAt': '1653765341.7096508'}, {'checked': False, 'createdAt': '1654889058.3081865', 'text': 'Integration text example', 'id': 'ec22e99c-e8f2-11ec-8617-6a38686dfa8a', 'updatedAt': '1654889058.3081865'}, {'checked': False, 'createdAt': '1653650104.2718484', 'text': 'Integration text example', 'id': '41fbed28-ddae-11ec-b07f-16074af4e576', 'updatedAt': '1653650104.2718484'}, {'checked': False, 'createdAt': '1654934804.9764092', 'text': 'Integration text example', 'id': '6f4c3246-e95d-11ec-b7d1-ca06cb808f81', 'updatedAt': '1654934804.9764092'}, {'checked': False, 'createdAt': '1653762965.1504486', 'text': 'Integration text example', 'id': '084f544a-deb5-11ec-9356-86446d8f8546', 'updatedAt': '1653762965.1504486'}, {'checked': False, 'createdAt': '1653656068.5664632', 'text': 'Integration text example', 'id': '24fb0ffc-ddbc-11ec-a84b-e63eb8ccee81', 'updatedAt': '1653656068.5664632'}, {'checked': False, 'createdAt': '1653763262.5345974', 'text': 'Integration text example', 'id': 'b9933fe6-deb5-11ec-9356-86446d8f8546', 'updatedAt': '1653763262.5345974'}, {'checked': False, 'createdAt': '1653767097.0442495', 'text': 'Integration text example', 'id': 'a71c49a8-debe-11ec-8ed3-b68f542e74e7', 'updatedAt': '1653767097.0442495'}, {'checked': False, 'createdAt': '1653732221.6582983', 'text': 'Integration text example', 'id': '73c2b5a2-de6d-11ec-8576-4e6340068a8f', 'updatedAt': '1653732221.6582983'}, {'checked': False, 'createdAt': '1654889609.0010812', 'text': 'Integration text example', 'id': '345ffaf0-e8f4-11ec-8b92-86f18d3d9db1', 'updatedAt': '1654889609.0010812'}, {'checked': False, 'createdAt': '1654800996.0115762', 'text': 'Integration text example', 'id': 'e2ead420-e825-11ec-bcf7-aacbfbfe2691', 'updatedAt': '1654800996.0115762'}, {'checked': False, 'createdAt': '1653656367.885698', 'text': 'Integration text example', 'id': 'd7638c1e-ddbc-11ec-9adc-1a464499e90b', 'updatedAt': '1653656367.885698'}, {'checked': False, 'createdAt': '1654949387.0709674', 'text': 'Integration text example', 'id': '62e1931c-e97f-11ec-b54c-d20111568a87', 'updatedAt': '1654949387.0709674'}, {'checked': False, 'createdAt': '1653652330.4069834', 'text': 'Integration text example', 'id': '70dd30ca-ddb3-11ec-ab2a-3af6e1dda34e', 'updatedAt': '1653652330.4069834'}, {'checked': False, 'createdAt': '1654950799.4854276', 'text': 'Integration text example', 'id': 'acbee9e6-e982-11ec-aefe-8a80d9b738c4', 'updatedAt': '1654950799.4854276'}, {'checked': False, 'createdAt': '1653767161.7686012', 'text': 'Integration text example', 'id': 'cdb06fa4-debe-11ec-8ed3-b68f542e74e7', 'updatedAt': '1653767161.7686012'}, {'checked': False, 'createdAt': '1653735848.8599513', 'text': 'Integration text example', 'id': 'e5bdc1b2-de75-11ec-b19a-4205a2398164', 'updatedAt': '1653735848.8599513'}, {'checked': False, 'createdAt': '1653766281.2473347', 'text': 'Integration text example', 'id': 'c0db8e3c-debc-11ec-b162-a62092f194f6', 'updatedAt': '1653766281.2473347'}, {'checked': False, 'createdAt': '1653649207.6360688', 'text': 'Integration text example', 'id': '2b8c2a5a-ddac-11ec-8eb1-4ed130ff1978', 'updatedAt': '1653649207.6360688'}, {'checked': False, 'createdAt': '1653650313.515152', 'text': 'Integration text example', 'id': 'beb3eafa-ddae-11ec-b07f-16074af4e576', 'updatedAt': '1653650313.515152'}, {'checked': False, 'createdAt': '1653576957.034896', 'text': 'Integration text example', 'id': 'f2d555fe-dd03-11ec-924e-76ee48c2cd0a', 'updatedAt': '1653576957.034896'}, {'checked': False, 'createdAt': '1653576298.2552135', 'text': 'Integration text example', 'id': '6a2b88d2-dd02-11ec-a773-22c5ab135c67', 'updatedAt': '1653576298.2552135'}, {'checked': False, 'createdAt': '1653651789.2566836', 'text': 'Integration text example', 'id': '2e58c74c-ddb2-11ec-a386-9674a1bbfc51', 'updatedAt': '1653651789.2566836'}, {'checked': False, 'createdAt': '1654949021.152227', 'text': 'Integration text example', 'id': '88c6ce68-e97e-11ec-ba1d-36953f3fd390', 'updatedAt': '1654949021.152227'}]
+End - integration test List TODO
+.---------------------------------------
+Starting - integration test Translate TODO
+Response Add todo: {"id": "317ced54-e98d-11ec-b847-6e96dba4cd2e", "text": "Integration text example", "checked": false, "createdAt": "1654955317.1572335", "updatedAt": "1654955317.1572335"}
+ID todo:317ced54-e98d-11ec-b847-6e96dba4cd2e
+Response Translate todo:  Exemple de texte d'intégration
+End - integration test Translate TODO
+.---------------------------------------
+Starting - integration test Update TODO
+Response Add todo: {"id": "333d4ba2-e98d-11ec-b847-6e96dba4cd2e", "text": "Integration text example - Initial", "checked": false, "createdAt": "1654955320.095674", "updatedAt": "1654955320.095674"}
+ID todo:333d4ba2-e98d-11ec-b847-6e96dba4cd2e
+Response Update todo: {'checked': 'true', 'createdAt': '1654955320.095674', 'text': 'Integration text example - Modified', 'id': '333d4ba2-e98d-11ec-b847-6e96dba4cd2e', 'updatedAt': 1654955322216}
+Response Get Todo: {'checked': 'true', 'createdAt': '1654955320.095674', 'text': 'Integration text example - Modified', 'id': '333d4ba2-e98d-11ec-b847-6e96dba4cd2e', 'updatedAt': 1654955322216}
+End - integration test Update TODO
+.
+============================== 6 passed in 17.36s ==============================

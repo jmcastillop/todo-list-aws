@@ -1,0 +1,532 @@
+Started by user Jose Devops Unir
+Obtained pipelines/PIPELINE-FULL-CD/Jenkinsfile from git git@github.com:jmcastillop/todo-list-aws.git
+[Pipeline] Start of Pipeline
+[Pipeline] node
+Running on Jenkins in /var/lib/jenkins/workspace/Practica 1/PIPELINE-FULL-CD
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Declarative: Checkout SCM)
+[Pipeline] checkout
+Selected Git installation does not exist. Using Default
+The recommended git tool is: NONE
+using credential github
+Cloning the remote Git repository
+Cloning repository git@github.com:jmcastillop/todo-list-aws.git
+ > git init /var/lib/jenkins/workspace/Practica 1/PIPELINE-FULL-CD # timeout=10
+Fetching upstream changes from git@github.com:jmcastillop/todo-list-aws.git
+ > git --version # timeout=10
+ > git --version # 'git version 2.17.1'
+using GIT_SSH to set credentials github
+ > git fetch --tags --progress -- git@github.com:jmcastillop/todo-list-aws.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git config remote.origin.url git@github.com:jmcastillop/todo-list-aws.git # timeout=10
+ > git config --add remote.origin.fetch +refs/heads/*:refs/remotes/origin/* # timeout=10
+Avoid second fetch
+ > git rev-parse refs/remotes/origin/master^{commit} # timeout=10
+Checking out Revision e91329ac19d6d49cc5607081305a004e01860b81 (refs/remotes/origin/master)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f e91329ac19d6d49cc5607081305a004e01860b81 # timeout=10
+Commit message: "Update Jenkinsfile"
+ > git rev-list --no-walk e91329ac19d6d49cc5607081305a004e01860b81 # timeout=10
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Staging)
+[Pipeline] echo
+Starting staging job
+[Pipeline] build (Building Practica 1 » PIPELINE-FULL-STAGING)
+Scheduling project: Practica 1 » PIPELINE-FULL-STAGING
+Starting building: Practica 1 » PIPELINE-FULL-STAGING #48
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Merge)
+[Pipeline] sh (Merging code to master)
++ set -x
++ git branch -a
+* (HEAD detached at e91329a)
+  remotes/origin/develop
+  remotes/origin/feature
+  remotes/origin/master
++ git checkout -b develop origin/develop
+Previous HEAD position was e91329a Update Jenkinsfile
+Switched to a new branch 'develop'
+Branch 'develop' set up to track remote branch 'develop' from 'origin'.
++ git checkout -b master origin/master
+Switched to a new branch 'master'
+Branch 'master' set up to track remote branch 'master' from 'origin'.
++ git merge develop
+Merge made by the 'recursive' strategy.
+ .gitignore                                         |    4 +-
+ pipelines/PIPELINE-FULL-STAGING/Jenkinsfile        |    2 +-
+ pipelines/PIPELINE-FULL-STAGING/unit_test.sh       |    4 +-
+ test/unit/.~c9_invoke_ii6rCf.py                    |  215 +
+ test/unit/TestToDo.py                              |   29 +-
+ todo-list-aws/bin/activate                         |   76 +
+ todo-list-aws/bin/activate.csh                     |   37 +
+ todo-list-aws/bin/activate.fish                    |   75 +
+ todo-list-aws/bin/easy_install                     |   11 +
+ todo-list-aws/bin/easy_install-3.7                 |   11 +
+ todo-list-aws/bin/pip                              |   11 +
+ todo-list-aws/bin/pip3                             |   11 +
+ todo-list-aws/bin/pip3.7                           |   11 +
+ todo-list-aws/bin/python                           |    1 +
+ todo-list-aws/bin/python3                          |    1 +
+ todo-list-aws/bin/python3.7                        |    1 +
+ .../lib/python3.7/site-packages/easy_install.py    |    5 +
+ .../pip-9.0.1.dist-info/DESCRIPTION.rst            |   39 +
+ .../site-packages/pip-9.0.1.dist-info/INSTALLER    |    1 +
+ .../site-packages/pip-9.0.1.dist-info/METADATA     |   70 +
+ .../site-packages/pip-9.0.1.dist-info/RECORD       |  123 +
+ .../site-packages/pip-9.0.1.dist-info/WHEEL        |    6 +
+ .../pip-9.0.1.dist-info/entry_points.txt           |    5 +
+ .../pip-9.0.1.dist-info/metadata.json              |    1 +
+ .../pip-9.0.1.dist-info/top_level.txt              |    1 +
+ .../lib/python3.7/site-packages/pip/__init__.py    |  338 ++
+ .../lib/python3.7/site-packages/pip/__main__.py    |   19 +
+ .../site-packages/pip/_vendor/__init__.py          |  109 +
+ .../lib/python3.7/site-packages/pip/basecommand.py |  337 ++
+ .../lib/python3.7/site-packages/pip/baseparser.py  |  293 +
+ .../lib/python3.7/site-packages/pip/cmdoptions.py  |  633 +++
+ .../site-packages/pip/commands/__init__.py         |   86 +
+ .../python3.7/site-packages/pip/commands/check.py  |   39 +
+ .../site-packages/pip/commands/completion.py       |   81 +
+ .../site-packages/pip/commands/download.py         |  212 +
+ .../python3.7/site-packages/pip/commands/freeze.py |   87 +
+ .../python3.7/site-packages/pip/commands/hash.py   |   57 +
+ .../python3.7/site-packages/pip/commands/help.py   |   35 +
+ .../site-packages/pip/commands/install.py          |  455 ++
+ .../python3.7/site-packages/pip/commands/list.py   |  337 ++
+ .../python3.7/site-packages/pip/commands/search.py |  133 +
+ .../python3.7/site-packages/pip/commands/show.py   |  154 +
+ .../site-packages/pip/commands/uninstall.py        |   76 +
+ .../python3.7/site-packages/pip/commands/wheel.py  |  208 +
+ .../python3.7/site-packages/pip/compat/__init__.py |  164 +
+ .../site-packages/pip/compat/dictconfig.py         |  565 ++
+ .../lib/python3.7/site-packages/pip/download.py    |  926 ++++
+ .../lib/python3.7/site-packages/pip/exceptions.py  |  244 +
+ .../lib/python3.7/site-packages/pip/index.py       | 1102 ++++
+ .../lib/python3.7/site-packages/pip/locations.py   |  182 +
+ .../python3.7/site-packages/pip/models/__init__.py |    4 +
+ .../python3.7/site-packages/pip/models/index.py    |   16 +
+ .../site-packages/pip/operations/__init__.py       |    0
+ .../site-packages/pip/operations/check.py          |   49 +
+ .../site-packages/pip/operations/freeze.py         |  132 +
+ .../lib/python3.7/site-packages/pip/pep425tags.py  |  324 ++
+ .../python3.7/site-packages/pip/req/__init__.py    |   10 +
+ .../python3.7/site-packages/pip/req/req_file.py    |  342 ++
+ .../python3.7/site-packages/pip/req/req_install.py | 1204 +++++
+ .../lib/python3.7/site-packages/pip/req/req_set.py |  798 +++
+ .../site-packages/pip/req/req_uninstall.py         |  195 +
+ .../python3.7/site-packages/pip/status_codes.py    |    8 +
+ .../python3.7/site-packages/pip/utils/__init__.py  |  870 +++
+ .../python3.7/site-packages/pip/utils/appdirs.py   |  248 +
+ .../lib/python3.7/site-packages/pip/utils/build.py |   42 +
+ .../site-packages/pip/utils/deprecation.py         |   76 +
+ .../python3.7/site-packages/pip/utils/encoding.py  |   31 +
+ .../site-packages/pip/utils/filesystem.py          |   28 +
+ .../lib/python3.7/site-packages/pip/utils/glibc.py |   81 +
+ .../python3.7/site-packages/pip/utils/hashes.py    |   92 +
+ .../python3.7/site-packages/pip/utils/logging.py   |  130 +
+ .../python3.7/site-packages/pip/utils/outdated.py  |  162 +
+ .../python3.7/site-packages/pip/utils/packaging.py |   63 +
+ .../site-packages/pip/utils/setuptools_build.py    |    8 +
+ .../lib/python3.7/site-packages/pip/utils/ui.py    |  344 ++
+ .../python3.7/site-packages/pip/vcs/__init__.py    |  366 ++
+ .../lib/python3.7/site-packages/pip/vcs/bazaar.py  |  116 +
+ .../lib/python3.7/site-packages/pip/vcs/git.py     |  300 ++
+ .../python3.7/site-packages/pip/vcs/mercurial.py   |  103 +
+ .../python3.7/site-packages/pip/vcs/subversion.py  |  269 +
+ .../lib/python3.7/site-packages/pip/wheel.py       |  853 +++
+ .../pkg_resources-0.0.0.dist-info/DESCRIPTION.rst  |    3 +
+ .../pkg_resources-0.0.0.dist-info/INSTALLER        |    1 +
+ .../pkg_resources-0.0.0.dist-info/METADATA         |   13 +
+ .../pkg_resources-0.0.0.dist-info/RECORD           |   38 +
+ .../pkg_resources-0.0.0.dist-info/WHEEL            |    6 +
+ .../pkg_resources-0.0.0.dist-info/metadata.json    |    1 +
+ .../site-packages/pkg_resources/__init__.py        | 3125 +++++++++++
+ .../pkg_resources/_vendor/__init__.py              |    0
+ .../site-packages/pkg_resources/_vendor/appdirs.py |  552 ++
+ .../pkg_resources/_vendor/packaging/__about__.py   |   21 +
+ .../pkg_resources/_vendor/packaging/__init__.py    |   14 +
+ .../pkg_resources/_vendor/packaging/_compat.py     |   30 +
+ .../pkg_resources/_vendor/packaging/_structures.py |   68 +
+ .../pkg_resources/_vendor/packaging/markers.py     |  301 ++
+ .../_vendor/packaging/requirements.py              |  127 +
+ .../pkg_resources/_vendor/packaging/specifiers.py  |  774 +++
+ .../pkg_resources/_vendor/packaging/utils.py       |   14 +
+ .../pkg_resources/_vendor/packaging/version.py     |  393 ++
+ .../pkg_resources/_vendor/pyparsing.py             | 5696 ++++++++++++++++++++
+ .../site-packages/pkg_resources/_vendor/six.py     |  868 +++
+ .../site-packages/pkg_resources/extern/__init__.py |   73 +
+ .../site-packages/pkg_resources/py31compat.py      |   22 +
+ .../setuptools-39.0.1.dist-info/DESCRIPTION.rst    |   36 +
+ .../setuptools-39.0.1.dist-info/INSTALLER          |    1 +
+ .../setuptools-39.0.1.dist-info/METADATA           |   67 +
+ .../setuptools-39.0.1.dist-info/RECORD             |  155 +
+ .../setuptools-39.0.1.dist-info/WHEEL              |    6 +
+ .../dependency_links.txt                           |    2 +
+ .../setuptools-39.0.1.dist-info/entry_points.txt   |   64 +
+ .../setuptools-39.0.1.dist-info/metadata.json      |    1 +
+ .../setuptools-39.0.1.dist-info/top_level.txt      |    3 +
+ .../setuptools-39.0.1.dist-info/zip-safe           |    1 +
+ .../python3.7/site-packages/setuptools/__init__.py |  180 +
+ .../site-packages/setuptools/_vendor/__init__.py   |    0
+ .../setuptools/_vendor/packaging/__about__.py      |   21 +
+ .../setuptools/_vendor/packaging/__init__.py       |   14 +
+ .../setuptools/_vendor/packaging/_compat.py        |   30 +
+ .../setuptools/_vendor/packaging/_structures.py    |   68 +
+ .../setuptools/_vendor/packaging/markers.py        |  301 ++
+ .../setuptools/_vendor/packaging/requirements.py   |  127 +
+ .../setuptools/_vendor/packaging/specifiers.py     |  774 +++
+ .../setuptools/_vendor/packaging/utils.py          |   14 +
+ .../setuptools/_vendor/packaging/version.py        |  393 ++
+ .../site-packages/setuptools/_vendor/pyparsing.py  | 5696 ++++++++++++++++++++
+ .../site-packages/setuptools/_vendor/six.py        |  868 +++
+ .../site-packages/setuptools/archive_util.py       |  173 +
+ .../site-packages/setuptools/build_meta.py         |  172 +
+ .../python3.7/site-packages/setuptools/cli-32.exe  |  Bin 0 -> 65536 bytes
+ .../python3.7/site-packages/setuptools/cli-64.exe  |  Bin 0 -> 74752 bytes
+ .../lib/python3.7/site-packages/setuptools/cli.exe |  Bin 0 -> 65536 bytes
+ .../site-packages/setuptools/command/__init__.py   |   18 +
+ .../site-packages/setuptools/command/alias.py      |   80 +
+ .../site-packages/setuptools/command/bdist_egg.py  |  502 ++
+ .../site-packages/setuptools/command/bdist_rpm.py  |   43 +
+ .../setuptools/command/bdist_wininst.py            |   21 +
+ .../site-packages/setuptools/command/build_clib.py |   98 +
+ .../site-packages/setuptools/command/build_ext.py  |  331 ++
+ .../site-packages/setuptools/command/build_py.py   |  270 +
+ .../site-packages/setuptools/command/develop.py    |  216 +
+ .../site-packages/setuptools/command/dist_info.py  |   36 +
+ .../setuptools/command/easy_install.py             | 2389 ++++++++
+ .../site-packages/setuptools/command/egg_info.py   |  696 +++
+ .../site-packages/setuptools/command/install.py    |  125 +
+ .../setuptools/command/install_egg_info.py         |   82 +
+ .../setuptools/command/install_lib.py              |  148 +
+ .../setuptools/command/install_scripts.py          |   65 +
+ .../setuptools/command/launcher manifest.xml       |   15 +
+ .../site-packages/setuptools/command/py36compat.py |  136 +
+ .../site-packages/setuptools/command/register.py   |   10 +
+ .../site-packages/setuptools/command/rotate.py     |   66 +
+ .../site-packages/setuptools/command/saveopts.py   |   22 +
+ .../site-packages/setuptools/command/sdist.py      |  200 +
+ .../site-packages/setuptools/command/setopt.py     |  149 +
+ .../site-packages/setuptools/command/test.py       |  268 +
+ .../site-packages/setuptools/command/upload.py     |   42 +
+ .../setuptools/command/upload_docs.py              |  206 +
+ .../python3.7/site-packages/setuptools/config.py   |  556 ++
+ .../python3.7/site-packages/setuptools/dep_util.py |   23 +
+ .../python3.7/site-packages/setuptools/depends.py  |  186 +
+ .../lib/python3.7/site-packages/setuptools/dist.py | 1070 ++++
+ .../site-packages/setuptools/extension.py          |   57 +
+ .../site-packages/setuptools/extern/__init__.py    |   73 +
+ .../python3.7/site-packages/setuptools/glibc.py    |   86 +
+ .../lib/python3.7/site-packages/setuptools/glob.py |  176 +
+ .../python3.7/site-packages/setuptools/gui-32.exe  |  Bin 0 -> 65536 bytes
+ .../python3.7/site-packages/setuptools/gui-64.exe  |  Bin 0 -> 75264 bytes
+ .../lib/python3.7/site-packages/setuptools/gui.exe |  Bin 0 -> 65536 bytes
+ .../python3.7/site-packages/setuptools/launch.py   |   35 +
+ .../site-packages/setuptools/lib2to3_ex.py         |   62 +
+ .../python3.7/site-packages/setuptools/monkey.py   |  197 +
+ .../lib/python3.7/site-packages/setuptools/msvc.py | 1302 +++++
+ .../site-packages/setuptools/namespaces.py         |  107 +
+ .../site-packages/setuptools/package_index.py      | 1119 ++++
+ .../site-packages/setuptools/pep425tags.py         |  316 ++
+ .../site-packages/setuptools/py27compat.py         |   28 +
+ .../site-packages/setuptools/py31compat.py         |   41 +
+ .../site-packages/setuptools/py33compat.py         |   54 +
+ .../site-packages/setuptools/py36compat.py         |   82 +
+ .../python3.7/site-packages/setuptools/sandbox.py  |  491 ++
+ .../site-packages/setuptools/script (dev).tmpl     |    5 +
+ .../python3.7/site-packages/setuptools/script.tmpl |    3 +
+ .../site-packages/setuptools/site-patch.py         |   74 +
+ .../site-packages/setuptools/ssl_support.py        |  260 +
+ .../site-packages/setuptools/unicode_utils.py      |   44 +
+ .../python3.7/site-packages/setuptools/version.py  |    6 +
+ .../python3.7/site-packages/setuptools/wheel.py    |  163 +
+ .../site-packages/setuptools/windows_support.py    |   29 +
+ todo-list-aws/lib64                                |    1 +
+ todo-list-aws/pyvenv.cfg                           |    3 +
+ .../CacheControl-0.11.7-py2.py3-none-any.whl       |  Bin 0 -> 18720 bytes
+ .../appdirs-1.4.3-py2.py3-none-any.whl             |  Bin 0 -> 12139 bytes
+ .../certifi-2018.1.18-py2.py3-none-any.whl         |  Bin 0 -> 150807 bytes
+ .../chardet-3.0.4-py2.py3-none-any.whl             |  Bin 0 -> 133328 bytes
+ .../colorama-0.3.7-py2.py3-none-any.whl            |  Bin 0 -> 19915 bytes
+ .../distlib-0.2.6-py2.py3-none-any.whl             |  Bin 0 -> 141707 bytes
+ .../distro-1.0.1-py2.py3-none-any.whl              |  Bin 0 -> 11733 bytes
+ .../html5lib-0.999999999-py2.py3-none-any.whl      |  Bin 0 -> 112620 bytes
+ .../python-wheels/idna-2.6-py2.py3-none-any.whl    |  Bin 0 -> 56485 bytes
+ .../ipaddress-0.0.0-py2.py3-none-any.whl           |  Bin 0 -> 17503 bytes
+ .../lockfile-0.12.2-py2.py3-none-any.whl           |  Bin 0 -> 13506 bytes
+ .../packaging-17.1-py2.py3-none-any.whl            |  Bin 0 -> 24058 bytes
+ .../python-wheels/pip-9.0.1-py2.py3-none-any.whl   |  Bin 0 -> 159266 bytes
+ .../pkg_resources-0.0.0-py2.py3-none-any.whl       |  Bin 0 -> 115663 bytes
+ .../progress-1.2-py2.py3-none-any.whl              |  Bin 0 -> 9606 bytes
+ .../pyparsing-2.2.0-py2.py3-none-any.whl           |  Bin 0 -> 56411 bytes
+ .../requests-2.18.4-py2.py3-none-any.whl           |  Bin 0 -> 88788 bytes
+ .../retrying-1.3.3-py2.py3-none-any.whl            |  Bin 0 -> 9480 bytes
+ .../setuptools-39.0.1-py2.py3-none-any.whl         |  Bin 0 -> 455758 bytes
+ .../python-wheels/six-1.11.0-py2.py3-none-any.whl  |  Bin 0 -> 10720 bytes
+ .../urllib3-1.22-py2.py3-none-any.whl              |  Bin 0 -> 125332 bytes
+ .../webencodings-0.5-py2.py3-none-any.whl          |  Bin 0 -> 11646 bytes
+ .../wheel-0.30.0-py2.py3-none-any.whl              |  Bin 0 -> 48886 bytes
+ 213 files changed, 49072 insertions(+), 5 deletions(-)
+ create mode 100644 test/unit/.~c9_invoke_ii6rCf.py
+ create mode 100644 todo-list-aws/bin/activate
+ create mode 100644 todo-list-aws/bin/activate.csh
+ create mode 100644 todo-list-aws/bin/activate.fish
+ create mode 100755 todo-list-aws/bin/easy_install
+ create mode 100755 todo-list-aws/bin/easy_install-3.7
+ create mode 100755 todo-list-aws/bin/pip
+ create mode 100755 todo-list-aws/bin/pip3
+ create mode 100755 todo-list-aws/bin/pip3.7
+ create mode 120000 todo-list-aws/bin/python
+ create mode 120000 todo-list-aws/bin/python3
+ create mode 120000 todo-list-aws/bin/python3.7
+ create mode 100644 todo-list-aws/lib/python3.7/site-packages/easy_install.py
+ create mode 100644 todo-list-aws/lib/python3.7/site-packages/pip-9.0.1.dist-info/DESCRIPTION.rst
+ create mode 100644 todo-list-aws/lib/python3.7/site-packages/pip-9.0.1.dist-info/INSTALLER
+ create mode 100644 todo-list-aws/lib/python3.7/site-packages/pip-9.0.1.dist-info/METADATA
+ create mode 100644 todo-list-aws/lib/python3.7/site-packages/pip-9.0.1.dist-info/RECORD
+ create mode 100644 todo-list-aws/lib/python3.7/site-packages/pip-9.0.1.dist-info/WHEEL
+ create mode 100644 todo-list-aws/lib/python3.7/site-packages/pip-9.0.1.dist-info/entry_points.txt
+ create mode 100644 todo-list-aws/lib/python3.7/site-packages/pip-9.0.1.dist-info/metadata.json
+ create mode 100644 todo-list-aws/lib/python3.7/site-packages/pip-9.0.1.dist-info/top_level.txt
+ create mode 100644 todo-list-aws/lib/python3.7/site-packages/pip/__init__.py
+ create mode 100644 todo-list-aws/lib/python3.7/site-packages/pip/__main__.py
+ create mode 100644 todo-list-aws/lib/python3.7/site-packages/pip/_vendor/__init__.py
+ create mode 100644 todo-list-aws/lib/python3.7/site-packages/pip/basecommand.py
+ create mode 100644 todo-list-aws/lib/python3.7/site-packages/pip/baseparser.py
+ create mode 100644 todo-list-aws/lib/python3.7/site-packages/pip/cmdoptions.py
+ create mode 100644 todo-list-aws/lib/python3.7/site-packages/pip/commands/__init__.py
+ create mode 100644 todo-list-aws/lib/python3.7/site-packages/pip/commands/check.py
+ create mode 100644 todo-list-aws/lib/python3.7/site-packages/pip/commands/completion.py
+ create mode 100644 todo-list-aws/lib/python3.7/site-packages/pip/commands/download.py
+ create mode 100644 todo-list-aws/lib/python3.7/site-packages/pip/commands/freeze.py
+ create mode 100644 todo-list-aws/lib/python3.7/site-packages/pip/commands/hash.py
+ create mode 100644 todo-list-aws/lib/python3.7/site-packages/pip/commands/help.py
+ create mode 100644 todo-list-aws/lib/python3.7/site-packages/pip/commands/install.py
+ create mode 100644 todo-list-aws/lib/python3.7/site-packages/pip/commands/list.py
+ create mode 100644 todo-list-aws/lib/python3.7/site-packages/pip/commands/search.py
+ create mode 100644 todo-list-aws/lib/python3.7/site-packages/pip/commands/show.py
+ create mode 100644 todo-list-aws/lib/python3.7/site-packages/pip/commands/uninstall.py
+ create mode 100644 todo-list-aws/lib/python3.7/site-packages/pip/commands/wheel.py
+ create mode 100644 todo-list-aws/lib/python3.7/site-packages/pip/compat/__init__.py
+ create mode 100644 todo-list-aws/lib/python3.7/site-packages/pip/compat/dictconfig.py
+ create mode 100644 todo-list-aws/lib/python3.7/site-packages/pip/download.py
+ create mode 100644 todo-list-aws/lib/python3.7/site-packages/pip/exceptions.py
+ create mode 100644 todo-list-aws/lib/python3.7/site-packages/pip/index.py
+ create mode 100644 todo-list-aws/lib/python3.7/site-packages/pip/locations.py
+ create mode 100644 todo-list-aws/lib/python3.7/site-packages/pip/models/__init__.py
+ create mode 100644 todo-list-aws/lib/python3.7/site-packages/pip/models/index.py
+ create mode 100644 todo-list-aws/lib/python3.7/site-packages/pip/operations/__init__.py
+ create mode 100644 todo-list-aws/lib/python3.7/site-packages/pip/operations/check.py
+ create mode 100644 todo-list-aws/lib/python3.7/site-packages/pip/operations/freeze.py
+ create mode 100644 todo-list-aws/lib/python3.7/site-packages/pip/pep425tags.py
+ create mode 100644 todo-list-aws/lib/python3.7/site-packages/pip/req/__init__.py
+ create mode 100644 todo-list-aws/lib/python3.7/site-packages/pip/req/req_file.py
+ create mode 100644 todo-list-aws/lib/python3.7/site-packages/pip/req/req_install.py
+ create mode 100644 todo-list-aws/lib/python3.7/site-packages/pip/req/req_set.py
+ create mode 100644 todo-list-aws/lib/python3.7/site-packages/pip/req/req_uninstall.py
+ create mode 100644 todo-list-aws/lib/python3.7/site-packages/pip/status_codes.py
+ create mode 100644 todo-list-aws/lib/python3.7/site-packages/pip/utils/__init__.py
+ create mode 100644 todo-list-aws/lib/python3.7/site-packages/pip/utils/appdirs.py
+ create mode 100644 todo-list-aws/lib/python3.7/site-packages/pip/utils/build.py
+ create mode 100644 todo-list-aws/lib/python3.7/site-packages/pip/utils/deprecation.py
+ create mode 100644 todo-list-aws/lib/python3.7/site-packages/pip/utils/encoding.py
+ create mode 100644 todo-list-aws/lib/python3.7/site-packages/pip/utils/filesystem.py
+ create mode 100644 todo-list-aws/lib/python3.7/site-packages/pip/utils/glibc.py
+ create mode 100644 todo-list-aws/lib/python3.7/site-packages/pip/utils/hashes.py
+ create mode 100644 todo-list-aws/lib/python3.7/site-packages/pip/utils/logging.py
+ create mode 100644 todo-list-aws/lib/python3.7/site-packages/pip/utils/outdated.py
+ create mode 100644 todo-list-aws/lib/python3.7/site-packages/pip/utils/packaging.py
+ create mode 100644 todo-list-aws/lib/python3.7/site-packages/pip/utils/setuptools_build.py
+ create mode 100644 todo-list-aws/lib/python3.7/site-packages/pip/utils/ui.py
+ create mode 100644 todo-list-aws/lib/python3.7/site-packages/pip/vcs/__init__.py
+ create mode 100644 todo-list-aws/lib/python3.7/site-packages/pip/vcs/bazaar.py
+ create mode 100644 todo-list-aws/lib/python3.7/site-packages/pip/vcs/git.py
+ create mode 100644 todo-list-aws/lib/python3.7/site-packages/pip/vcs/mercurial.py
+ create mode 100644 todo-list-aws/lib/python3.7/site-packages/pip/vcs/subversion.py
+ create mode 100644 todo-list-aws/lib/python3.7/site-packages/pip/wheel.py
+ create mode 100644 todo-list-aws/lib/python3.7/site-packages/pkg_resources-0.0.0.dist-info/DESCRIPTION.rst
+ create mode 100644 todo-list-aws/lib/python3.7/site-packages/pkg_resources-0.0.0.dist-info/INSTALLER
+ create mode 100644 todo-list-aws/lib/python3.7/site-packages/pkg_resources-0.0.0.dist-info/METADATA
+ create mode 100644 todo-list-aws/lib/python3.7/site-packages/pkg_resources-0.0.0.dist-info/RECORD
+ create mode 100644 todo-list-aws/lib/python3.7/site-packages/pkg_resources-0.0.0.dist-info/WHEEL
+ create mode 100644 todo-list-aws/lib/python3.7/site-packages/pkg_resources-0.0.0.dist-info/metadata.json
+ create mode 100644 todo-list-aws/lib/python3.7/site-packages/pkg_resources/__init__.py
+ create mode 100644 todo-list-aws/lib/python3.7/site-packages/pkg_resources/_vendor/__init__.py
+ create mode 100644 todo-list-aws/lib/python3.7/site-packages/pkg_resources/_vendor/appdirs.py
+ create mode 100644 todo-list-aws/lib/python3.7/site-packages/pkg_resources/_vendor/packaging/__about__.py
+ create mode 100644 todo-list-aws/lib/python3.7/site-packages/pkg_resources/_vendor/packaging/__init__.py
+ create mode 100644 todo-list-aws/lib/python3.7/site-packages/pkg_resources/_vendor/packaging/_compat.py
+ create mode 100644 todo-list-aws/lib/python3.7/site-packages/pkg_resources/_vendor/packaging/_structures.py
+ create mode 100644 todo-list-aws/lib/python3.7/site-packages/pkg_resources/_vendor/packaging/markers.py
+ create mode 100644 todo-list-aws/lib/python3.7/site-packages/pkg_resources/_vendor/packaging/requirements.py
+ create mode 100644 todo-list-aws/lib/python3.7/site-packages/pkg_resources/_vendor/packaging/specifiers.py
+ create mode 100644 todo-list-aws/lib/python3.7/site-packages/pkg_resources/_vendor/packaging/utils.py
+ create mode 100644 todo-list-aws/lib/python3.7/site-packages/pkg_resources/_vendor/packaging/version.py
+ create mode 100644 todo-list-aws/lib/python3.7/site-packages/pkg_resources/_vendor/pyparsing.py
+ create mode 100644 todo-list-aws/lib/python3.7/site-packages/pkg_resources/_vendor/six.py
+ create mode 100644 todo-list-aws/lib/python3.7/site-packages/pkg_resources/extern/__init__.py
+ create mode 100644 todo-list-aws/lib/python3.7/site-packages/pkg_resources/py31compat.py
+ create mode 100644 todo-list-aws/lib/python3.7/site-packages/setuptools-39.0.1.dist-info/DESCRIPTION.rst
+ create mode 100644 todo-list-aws/lib/python3.7/site-packages/setuptools-39.0.1.dist-info/INSTALLER
+ create mode 100644 todo-list-aws/lib/python3.7/site-packages/setuptools-39.0.1.dist-info/METADATA
+ create mode 100644 todo-list-aws/lib/python3.7/site-packages/setuptools-39.0.1.dist-info/RECORD
+ create mode 100644 todo-list-aws/lib/python3.7/site-packages/setuptools-39.0.1.dist-info/WHEEL
+ create mode 100644 todo-list-aws/lib/python3.7/site-packages/setuptools-39.0.1.dist-info/dependency_links.txt
+ create mode 100644 todo-list-aws/lib/python3.7/site-packages/setuptools-39.0.1.dist-info/entry_points.txt
+ create mode 100644 todo-list-aws/lib/python3.7/site-packages/setuptools-39.0.1.dist-info/metadata.json
+ create mode 100644 todo-list-aws/lib/python3.7/site-packages/setuptools-39.0.1.dist-info/top_level.txt
+ create mode 100644 todo-list-aws/lib/python3.7/site-packages/setuptools-39.0.1.dist-info/zip-safe
+ create mode 100644 todo-list-aws/lib/python3.7/site-packages/setuptools/__init__.py
+ create mode 100644 todo-list-aws/lib/python3.7/site-packages/setuptools/_vendor/__init__.py
+ create mode 100644 todo-list-aws/lib/python3.7/site-packages/setuptools/_vendor/packaging/__about__.py
+ create mode 100644 todo-list-aws/lib/python3.7/site-packages/setuptools/_vendor/packaging/__init__.py
+ create mode 100644 todo-list-aws/lib/python3.7/site-packages/setuptools/_vendor/packaging/_compat.py
+ create mode 100644 todo-list-aws/lib/python3.7/site-packages/setuptools/_vendor/packaging/_structures.py
+ create mode 100644 todo-list-aws/lib/python3.7/site-packages/setuptools/_vendor/packaging/markers.py
+ create mode 100644 todo-list-aws/lib/python3.7/site-packages/setuptools/_vendor/packaging/requirements.py
+ create mode 100644 todo-list-aws/lib/python3.7/site-packages/setuptools/_vendor/packaging/specifiers.py
+ create mode 100644 todo-list-aws/lib/python3.7/site-packages/setuptools/_vendor/packaging/utils.py
+ create mode 100644 todo-list-aws/lib/python3.7/site-packages/setuptools/_vendor/packaging/version.py
+ create mode 100644 todo-list-aws/lib/python3.7/site-packages/setuptools/_vendor/pyparsing.py
+ create mode 100644 todo-list-aws/lib/python3.7/site-packages/setuptools/_vendor/six.py
+ create mode 100644 todo-list-aws/lib/python3.7/site-packages/setuptools/archive_util.py
+ create mode 100644 todo-list-aws/lib/python3.7/site-packages/setuptools/build_meta.py
+ create mode 100644 todo-list-aws/lib/python3.7/site-packages/setuptools/cli-32.exe
+ create mode 100644 todo-list-aws/lib/python3.7/site-packages/setuptools/cli-64.exe
+ create mode 100644 todo-list-aws/lib/python3.7/site-packages/setuptools/cli.exe
+ create mode 100644 todo-list-aws/lib/python3.7/site-packages/setuptools/command/__init__.py
+ create mode 100644 todo-list-aws/lib/python3.7/site-packages/setuptools/command/alias.py
+ create mode 100644 todo-list-aws/lib/python3.7/site-packages/setuptools/command/bdist_egg.py
+ create mode 100644 todo-list-aws/lib/python3.7/site-packages/setuptools/command/bdist_rpm.py
+ create mode 100644 todo-list-aws/lib/python3.7/site-packages/setuptools/command/bdist_wininst.py
+ create mode 100644 todo-list-aws/lib/python3.7/site-packages/setuptools/command/build_clib.py
+ create mode 100644 todo-list-aws/lib/python3.7/site-packages/setuptools/command/build_ext.py
+ create mode 100644 todo-list-aws/lib/python3.7/site-packages/setuptools/command/build_py.py
+ create mode 100644 todo-list-aws/lib/python3.7/site-packages/setuptools/command/develop.py
+ create mode 100644 todo-list-aws/lib/python3.7/site-packages/setuptools/command/dist_info.py
+ create mode 100644 todo-list-aws/lib/python3.7/site-packages/setuptools/command/easy_install.py
+ create mode 100644 todo-list-aws/lib/python3.7/site-packages/setuptools/command/egg_info.py
+ create mode 100644 todo-list-aws/lib/python3.7/site-packages/setuptools/command/install.py
+ create mode 100644 todo-list-aws/lib/python3.7/site-packages/setuptools/command/install_egg_info.py
+ create mode 100644 todo-list-aws/lib/python3.7/site-packages/setuptools/command/install_lib.py
+ create mode 100644 todo-list-aws/lib/python3.7/site-packages/setuptools/command/install_scripts.py
+ create mode 100644 todo-list-aws/lib/python3.7/site-packages/setuptools/command/launcher manifest.xml
+ create mode 100644 todo-list-aws/lib/python3.7/site-packages/setuptools/command/py36compat.py
+ create mode 100644 todo-list-aws/lib/python3.7/site-packages/setuptools/command/register.py
+ create mode 100644 todo-list-aws/lib/python3.7/site-packages/setuptools/command/rotate.py
+ create mode 100644 todo-list-aws/lib/python3.7/site-packages/setuptools/command/saveopts.py
+ create mode 100644 todo-list-aws/lib/python3.7/site-packages/setuptools/command/sdist.py
+ create mode 100644 todo-list-aws/lib/python3.7/site-packages/setuptools/command/setopt.py
+ create mode 100644 todo-list-aws/lib/python3.7/site-packages/setuptools/command/test.py
+ create mode 100644 todo-list-aws/lib/python3.7/site-packages/setuptools/command/upload.py
+ create mode 100644 todo-list-aws/lib/python3.7/site-packages/setuptools/command/upload_docs.py
+ create mode 100644 todo-list-aws/lib/python3.7/site-packages/setuptools/config.py
+ create mode 100644 todo-list-aws/lib/python3.7/site-packages/setuptools/dep_util.py
+ create mode 100644 todo-list-aws/lib/python3.7/site-packages/setuptools/depends.py
+ create mode 100644 todo-list-aws/lib/python3.7/site-packages/setuptools/dist.py
+ create mode 100644 todo-list-aws/lib/python3.7/site-packages/setuptools/extension.py
+ create mode 100644 todo-list-aws/lib/python3.7/site-packages/setuptools/extern/__init__.py
+ create mode 100644 todo-list-aws/lib/python3.7/site-packages/setuptools/glibc.py
+ create mode 100644 todo-list-aws/lib/python3.7/site-packages/setuptools/glob.py
+ create mode 100644 todo-list-aws/lib/python3.7/site-packages/setuptools/gui-32.exe
+ create mode 100644 todo-list-aws/lib/python3.7/site-packages/setuptools/gui-64.exe
+ create mode 100644 todo-list-aws/lib/python3.7/site-packages/setuptools/gui.exe
+ create mode 100644 todo-list-aws/lib/python3.7/site-packages/setuptools/launch.py
+ create mode 100644 todo-list-aws/lib/python3.7/site-packages/setuptools/lib2to3_ex.py
+ create mode 100644 todo-list-aws/lib/python3.7/site-packages/setuptools/monkey.py
+ create mode 100644 todo-list-aws/lib/python3.7/site-packages/setuptools/msvc.py
+ create mode 100644 todo-list-aws/lib/python3.7/site-packages/setuptools/namespaces.py
+ create mode 100644 todo-list-aws/lib/python3.7/site-packages/setuptools/package_index.py
+ create mode 100644 todo-list-aws/lib/python3.7/site-packages/setuptools/pep425tags.py
+ create mode 100644 todo-list-aws/lib/python3.7/site-packages/setuptools/py27compat.py
+ create mode 100644 todo-list-aws/lib/python3.7/site-packages/setuptools/py31compat.py
+ create mode 100644 todo-list-aws/lib/python3.7/site-packages/setuptools/py33compat.py
+ create mode 100644 todo-list-aws/lib/python3.7/site-packages/setuptools/py36compat.py
+ create mode 100644 todo-list-aws/lib/python3.7/site-packages/setuptools/sandbox.py
+ create mode 100644 todo-list-aws/lib/python3.7/site-packages/setuptools/script (dev).tmpl
+ create mode 100644 todo-list-aws/lib/python3.7/site-packages/setuptools/script.tmpl
+ create mode 100644 todo-list-aws/lib/python3.7/site-packages/setuptools/site-patch.py
+ create mode 100644 todo-list-aws/lib/python3.7/site-packages/setuptools/ssl_support.py
+ create mode 100644 todo-list-aws/lib/python3.7/site-packages/setuptools/unicode_utils.py
+ create mode 100644 todo-list-aws/lib/python3.7/site-packages/setuptools/version.py
+ create mode 100644 todo-list-aws/lib/python3.7/site-packages/setuptools/wheel.py
+ create mode 100644 todo-list-aws/lib/python3.7/site-packages/setuptools/windows_support.py
+ create mode 120000 todo-list-aws/lib64
+ create mode 100644 todo-list-aws/pyvenv.cfg
+ create mode 100644 todo-list-aws/share/python-wheels/CacheControl-0.11.7-py2.py3-none-any.whl
+ create mode 100644 todo-list-aws/share/python-wheels/appdirs-1.4.3-py2.py3-none-any.whl
+ create mode 100644 todo-list-aws/share/python-wheels/certifi-2018.1.18-py2.py3-none-any.whl
+ create mode 100644 todo-list-aws/share/python-wheels/chardet-3.0.4-py2.py3-none-any.whl
+ create mode 100644 todo-list-aws/share/python-wheels/colorama-0.3.7-py2.py3-none-any.whl
+ create mode 100644 todo-list-aws/share/python-wheels/distlib-0.2.6-py2.py3-none-any.whl
+ create mode 100644 todo-list-aws/share/python-wheels/distro-1.0.1-py2.py3-none-any.whl
+ create mode 100644 todo-list-aws/share/python-wheels/html5lib-0.999999999-py2.py3-none-any.whl
+ create mode 100644 todo-list-aws/share/python-wheels/idna-2.6-py2.py3-none-any.whl
+ create mode 100644 todo-list-aws/share/python-wheels/ipaddress-0.0.0-py2.py3-none-any.whl
+ create mode 100644 todo-list-aws/share/python-wheels/lockfile-0.12.2-py2.py3-none-any.whl
+ create mode 100644 todo-list-aws/share/python-wheels/packaging-17.1-py2.py3-none-any.whl
+ create mode 100644 todo-list-aws/share/python-wheels/pip-9.0.1-py2.py3-none-any.whl
+ create mode 100644 todo-list-aws/share/python-wheels/pkg_resources-0.0.0-py2.py3-none-any.whl
+ create mode 100644 todo-list-aws/share/python-wheels/progress-1.2-py2.py3-none-any.whl
+ create mode 100644 todo-list-aws/share/python-wheels/pyparsing-2.2.0-py2.py3-none-any.whl
+ create mode 100644 todo-list-aws/share/python-wheels/requests-2.18.4-py2.py3-none-any.whl
+ create mode 100644 todo-list-aws/share/python-wheels/retrying-1.3.3-py2.py3-none-any.whl
+ create mode 100644 todo-list-aws/share/python-wheels/setuptools-39.0.1-py2.py3-none-any.whl
+ create mode 100644 todo-list-aws/share/python-wheels/six-1.11.0-py2.py3-none-any.whl
+ create mode 100644 todo-list-aws/share/python-wheels/urllib3-1.22-py2.py3-none-any.whl
+ create mode 100644 todo-list-aws/share/python-wheels/webencodings-0.5-py2.py3-none-any.whl
+ create mode 100644 todo-list-aws/share/python-wheels/wheel-0.30.0-py2.py3-none-any.whl
+[Pipeline] sshagent
+[ssh-agent] Using credentials jmcastillop (github)
+[ssh-agent] Looking for ssh-agent implementation...
+[ssh-agent]   Exec ssh-agent (binary ssh-agent on a remote machine)
+$ ssh-agent
+SSH_AUTH_SOCK=/tmp/ssh-jtCWhxWvZHrT/agent.8219
+SSH_AGENT_PID=8221
+Running ssh-add (command line suppressed)
+Identity added: /var/lib/jenkins/workspace/Practica 1/PIPELINE-FULL-CD@tmp/private_key_6986173980796294926.key (/var/lib/jenkins/workspace/Practica 1/PIPELINE-FULL-CD@tmp/private_key_6986173980796294926.key)
+[ssh-agent] Started.
+[Pipeline] {
+[Pipeline] sh
++ git push origin master
+To github.com:jmcastillop/todo-list-aws.git
+   e91329a..c24b051  master -> master
+[Pipeline] }
+$ ssh-agent -k
+unset SSH_AUTH_SOCK;
+unset SSH_AGENT_PID;
+echo Agent pid 8221 killed;
+[ssh-agent] Stopped.
+[Pipeline] // sshagent
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Production)
+[Pipeline] echo
+Starting production job
+[Pipeline] build (Building Practica 1 » PIPELINE-FULL-PRODUCTION)
+Scheduling project: Practica 1 » PIPELINE-FULL-PRODUCTION
+Starting building: Practica 1 » PIPELINE-FULL-PRODUCTION #10
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Declarative: Post Actions)
+[Pipeline] echo
+Clean env: delete dir
+[Pipeline] cleanWs
+[WS-CLEANUP] Deleting project workspace...
+[WS-CLEANUP] Deferred wipeout is used...
+[WS-CLEANUP] done
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // node
+[Pipeline] End of Pipeline
+Finished: SUCCESS
