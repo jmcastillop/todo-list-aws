@@ -127,7 +127,7 @@ class TestDatabaseFunctions(unittest.TestCase):
     def test_translate_todo(self):
         print ('---------------------')
         print ('Start: test_translate_todo')
-        #self.table  = os.environ['DYNAMODB_TABLE']
+        self.table = os.environ['DYNAMODB_TABLE']
         from src.todoList import translate_item
         # Testing file functions
         translation = translate_item(self.text, "en", self.dynamodb)
